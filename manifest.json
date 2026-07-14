@@ -13,7 +13,7 @@
       "minimal-ui"
     ],
   
-    "orientation": "landscape",
+    "orientation": "any",
   
     "background_color": "#ffffff",
     "theme_color": "#163d6b",
