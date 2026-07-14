@@ -838,8 +838,6 @@ RESPONSIVE - TABLETTES ET TÉLÉPHONES
 
         margin:0;
 
-        padding:15px;
-
         border-radius:8px;
 
     }
@@ -920,23 +918,7 @@ RESPONSIVE - TABLETTES ET TÉLÉPHONES
     }
 
 }
-@media (max-width:768px){
 
-    .table-responsive{
-
-        overflow-x:auto;
-
-        -webkit-overflow-scrolling:touch;
-
-    }
-
-    table{
-
-        min-width:900px;
-
-    }
-
-}
 @media (max-width:768px){
 
     #summary{
