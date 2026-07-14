@@ -818,3 +818,135 @@ BARRE D'ACTIONS
     background:#555;
 
 }
+/*==================================================
+RESPONSIVE - TABLETTES ET TÉLÉPHONES
+==================================================*/
+
+@media (max-width: 992px){
+
+    body{
+
+        padding:10px;
+
+    }
+
+    .container{
+
+        width:100%;
+
+        max-width:100%;
+
+        margin:0;
+
+        padding:15px;
+
+        border-radius:8px;
+
+    }
+
+    section{
+
+        padding:18px;
+
+    }
+
+}
+@media (max-width:768px){
+
+    h1{
+
+        font-size:24px;
+
+        text-align:center;
+
+    }
+
+    h2{
+
+        font-size:21px;
+
+    }
+
+    h3{
+
+        font-size:19px;
+
+    }
+
+    h4{
+
+        font-size:17px;
+
+    }
+
+}
+@media (max-width:768px){
+
+    .action-bar{
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+    .action-bar button{
+
+        width:100%;
+
+        min-width:unset;
+
+    }
+
+    button{
+
+        width:100%;
+
+    }
+
+}
+@media (max-width:768px){
+
+    input,
+
+    select,
+
+    textarea{
+
+        width:100%;
+
+        font-size:16px;
+
+    }
+
+}
+@media (max-width:768px){
+
+    .table-responsive{
+
+        overflow-x:auto;
+
+        -webkit-overflow-scrolling:touch;
+
+    }
+
+    table{
+
+        min-width:900px;
+
+    }
+
+}
+@media (max-width:768px){
+
+    #summary{
+
+        padding:18px;
+
+        font-size:14px;
+
+        line-height:1.6;
+
+    }
+
+}
