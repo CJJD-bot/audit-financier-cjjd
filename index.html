@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rapport d'audit financier | CJJD ASBL</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#163d6b">
+<link rel="icon" href="assets/favicon.ico">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ================= EN-TÊTE ================= -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <img src="assets/logo-cjjd.jpg" alt="Logo CJJD">
+
+        </div>
+
+        <div class="header-text">
+
+            <h1>CLINIQUE JURIDIQUE JUSDIVINUM (CJJD ASBL)</h1>
+
+            <h2>COMMISSION DE CONTRÔLE</h2>
+
+            <h3>RAPPORT D'AUDIT FINANCIER</h3>
+
+            <p>
+                Modèle officiel de rapport d'audit financier
+            </p>
+
+        </div>
+
+    </header>
+
+    <!-- ================= IDENTIFICATION ================= -->
+
+    <section class="card">
+
+        <h2>Identification de la mission</h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>Numéro du rapport</label>
+
+                <input type="text">
+
+            </div>
+
+            <div>
+
+                <label>Exercice audité</label>
+
+                <input type="text">
+
+            </div>
+
+            <div>
+
+                <label>Date de la mission</label>
+
+                <input type="date">
+
+            </div>
+
+            <div>
+
+                <label>Lieu</label>
+
+                <input type="text">
+
+            </div>
+
+            <div>
+
+                <label>Président de la Commission</label>
+
+                <input type="text">
+
+            </div>
+
+            <div>
+
+                <label>Membres</label>
+
+                <input type="text">
+
+            </div>
+
+            <div>
+
+                <label>Coordonnateur</label>
+
+                <input type="text">
+
+            </div>
+
+            <div>
+
+                <label>Questeur titulaire</label>
+
+                <input type="text">
+
+            </div>
+
+            <div>
+
+                <label>Questeur adjoint</label>
+
+                <input type="text">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= LES AXES D'AUDIT VIENDRONT ICI ================= -->
+
+    <div id="auditContainer"></div>
+
+    <!-- ================= SYNTHÈSE ================= -->
+<section class="card" id="summaryCard">
+
+    <h2>Synthèse de l'audit</h2>
+
+    <div id="summary">
+
+        <!-- Généré automatiquement par JavaScript -->
+
+    </div>
+
+</section>
+
+    <!-- ================= OPINION ================= -->
+
+    <section class="card">
+
+        <h2>Opinion de la Commission</h2>
+
+        <select id="opinion">
+
+            <option>Opinion favorable</option>
+
+            <option>Opinion favorable avec réserves</option>
+
+            <option>Opinion défavorable</option>
+
+        </select>
+
+        <br><br>
+
+        <label>Motivation</label>
+
+        <textarea></textarea>
+
+    </section>
+
+    <!-- ================= RECOMMANDATIONS ================= -->
+
+    <section class="card">
+
+        <h2>Recommandations générales</h2>
+
+        <textarea></textarea>
+
+    </section>
+
+    <!-- ================= SIGNATURES ================= -->
+
+    <section class="card">
+
+        <h2>Clôture de la mission</h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>Lieu</label>
+
+                <input type="text">
+
+            </div>
+
+            <div>
+
+                <label>Date</label>
+
+                <input type="date">
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <h3>Commission de contrôle</h3>
+
+        <div class="grid">
+
+            <input placeholder="Président">
+
+            <input placeholder="Signature">
+
+            <input placeholder="Membre">
+
+            <input placeholder="Signature">
+
+            <input placeholder="Membre">
+
+            <input placeholder="Signature">
+
+        </div>
+
+        <br>
+
+        <h3>Personnes auditées</h3>
+
+        <div class="grid">
+
+            <input placeholder="Coordonnateur">
+
+            <input placeholder="Signature">
+
+            <input placeholder="Questeur titulaire">
+
+            <input placeholder="Signature">
+
+            <input placeholder="Questeur adjoint">
+
+            <input placeholder="Signature">
+
+        </div>
+
+        <br><br>
+
+        <div class="action-bar">
+
+            <button
+                id="newMissionBtn"
+                class="btn-secondary">
+        
+                🆕 Nouvelle mission
+        
+            </button>
+        
+            <button
+                id="saveBtn"
+                class="btn-primary">
+        
+                💾 Enregistrer le rapport
+        
+            </button>
+        
+            <button
+                id="printBtn"
+                class="btn-primary">
+        
+                🖨️ Imprimer le rapport
+        
+            </button>
+        
+        </div>
+
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
