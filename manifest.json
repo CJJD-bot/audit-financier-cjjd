@@ -2,22 +2,34 @@
     "name": "Audit Financier CJJD",
     "short_name": "Audit CJJD",
     "description": "Application d'audit financier de la Commission de contrôle de la CJJD ASBL",
-    "start_url": "./index.html",
+  
+    "id": "/audit-financier-cjjd/",
+    "start_url": "/audit-financier-cjjd/",
+    "scope": "/audit-financier-cjjd/",
+  
     "display": "standalone",
+    "display_override": [
+      "standalone",
+      "minimal-ui"
+    ],
+  
+    "orientation": "landscape",
+  
     "background_color": "#ffffff",
     "theme_color": "#163d6b",
-    "orientation": "portrait",
-    "scope": "./",
+  
     "icons": [
       {
         "src": "assets/icon-192.png",
         "sizes": "192x192",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "any maskable"
       },
       {
         "src": "assets/icon-512.png",
         "sizes": "512x512",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "any maskable"
       }
     ]
   }

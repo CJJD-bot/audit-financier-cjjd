@@ -1,39 +1,81 @@
-const CACHE="audit-cjjd-v1";
+const CACHE_NAME = "audit-cjjd-v2";
 
-const FILES=[
+const APP_FILES = [
 
-"/",
+    "/audit-financier-cjjd/",
 
-"/index.html",
+    "/audit-financier-cjjd/index.html",
 
-"/style.css",
+    "/audit-financier-cjjd/style.css",
 
-"/script.js",
+    "/audit-financier-cjjd/script.js",
 
-"/manifest.json"
+    "/audit-financier-cjjd/manifest.json",
+
+    "/audit-financier-cjjd/assets/logo-cjjd.jpg",
+
+    "/audit-financier-cjjd/assets/icon-192.png",
+
+    "/audit-financier-cjjd/assets/icon-512.png"
 
 ];
 
-self.addEventListener("install",e=>{
+self.addEventListener("install",event=>{
 
-e.waitUntil(
+    self.skipWaiting();
 
-caches.open(CACHE)
+    event.waitUntil(
 
-.then(cache=>cache.addAll(FILES))
+        caches.open(CACHE_NAME)
 
-);
+        .then(cache=>cache.addAll(APP_FILES))
+
+    );
 
 });
 
-self.addEventListener("fetch",e=>{
+self.addEventListener("activate",event=>{
 
-e.respondWith(
+    event.waitUntil(
 
-caches.match(e.request)
+        caches.keys()
 
-.then(r=>r||fetch(e.request))
+        .then(keys=>
 
-);
+            Promise.all(
+
+                keys.map(key=>{
+
+                    if(key!==CACHE_NAME){
+
+                        return caches.delete(key);
+
+                    }
+
+                })
+
+            )
+
+        )
+
+    );
+
+    self.clients.claim();
+
+});
+
+self.addEventListener("fetch",event=>{
+
+    event.respondWith(
+
+        caches.match(event.request)
+
+        .then(response=>{
+
+            return response || fetch(event.request);
+
+        })
+
+    );
 
 });
