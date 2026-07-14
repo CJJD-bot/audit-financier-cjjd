@@ -141,6 +141,7 @@ const rapportAudit = {
     }
     
     };
+    let missionCourante = null;
     /*************************************************
  * TABLEAU DE LA TECHNIQUE A
  *************************************************/
@@ -1151,33 +1152,125 @@ Aucune anomalie détectée
 
 document.getElementById("saveBtn").onclick=function(){
 
-    const mission={
+    let missions=
 
-        date:new Date().toISOString(),
+        JSON.parse(
 
-        rapportAudit
+            localStorage.getItem("missionsCJJD")
 
-    };
+        )||[];
+
+        const mission={
+
+            id:Date.now(),
+        
+            date:new Date().toLocaleString("fr-FR"),
+        
+            rapport:structuredClone(rapportAudit),
+        
+            techniqueC:{
+        
+                encaissementsEDE:extraireTableau("encaissementsEDE"),
+        
+                encaissementsJournal:extraireTableau("encaissementsJournal"),
+        
+                decaissementsEDD:extraireTableau("decaissementsEDD"),
+        
+                decaissementsJournal:extraireTableau("decaissementsJournal")
+        
+            },
+        
+            identification:{
+        
+                numeroRapport:document.getElementById("numeroRapport").value,
+        
+                exercice:document.getElementById("exercice").value,
+        
+                dateMission:document.getElementById("dateMission").value,
+        
+                lieuMission:document.getElementById("lieuMission").value,
+        
+                presidentCommission:document.getElementById("presidentCommission").value,
+        
+                membresCommission:document.getElementById("membresCommission").value,
+        
+                coordonnateur:document.getElementById("coordonnateur").value,
+        
+                questeurTitulaire:document.getElementById("questeurTitulaire").value,
+        
+                questeurAdjoint:document.getElementById("questeurAdjoint").value
+        
+            },
+        
+            conclusion:{
+        
+                opinion:document.getElementById("opinion").value,
+        
+                motivation:document.getElementById("motivation").value,
+        
+                recommandations:document.getElementById("recommandations").value,
+        
+                lieuCloture:document.getElementById("lieuCloture").value,
+        
+                dateCloture:document.getElementById("dateCloture").value
+        
+            }
+        
+        };
+
+    missions.push(mission);
 
     localStorage.setItem(
 
-        "rapportAuditCJJD",
+        "missionsCJJD",
 
-        JSON.stringify(mission)
-
-    );
-
-    alert(
-
-        "Le rapport d'audit a été enregistré avec succès."
+        JSON.stringify(missions)
 
     );
+
+    chargerRapports();
+
+    alert("Rapport enregistré avec succès.");
 
 };
 /*************************************************
  NOUVELLE MISSION
 *************************************************/
+function extraireTableau(id){
 
+    const tbody=document.getElementById(id);
+
+    if(!tbody) return [];
+
+    const lignes=[];
+
+    tbody.querySelectorAll("tr").forEach(tr=>{
+
+        const champs=tr.querySelectorAll("input,select");
+
+        if(champs.length<6) return;
+
+        lignes.push({
+
+            date:champs[0].value,
+
+            canal:champs[1].value,
+
+            libelle:champs[2].value,
+
+            devise:champs[3].value,
+
+            montant:champs[4].value,
+
+            reference:champs[5].value
+
+        });
+
+    });
+
+    return lignes;
+
+}
 document.getElementById("newMissionBtn").onclick=function(){
 
     if(
@@ -3089,3 +3182,323 @@ if("serviceWorker" in navigator){
     navigator.serviceWorker.register("service-worker.js");
     
     }
+    function chargerRapports(){
+
+        const liste=document.getElementById("savedReports");
+    
+        if(!liste) return;
+    
+        const missions=
+    
+            JSON.parse(
+    
+                localStorage.getItem("missionsCJJD")
+    
+            )||[];
+    
+        if(missions.length===0){
+    
+            liste.innerHTML=
+    
+            `<div class="empty-report">
+    
+            Aucun rapport enregistré.
+    
+            </div>`;
+    
+            return;
+    
+        }
+    
+        liste.innerHTML="";
+    
+        missions.forEach((mission,index)=>{
+    
+            liste.innerHTML+=`
+    
+            <div class="report-card">
+    
+                <div class="report-info">
+    
+                    <strong>Mission ${index+1}</strong><br>
+    
+                    ${mission.date}
+    
+                </div>
+    
+                <div class="report-actions">
+    
+                    <button onclick="ouvrirMission(${mission.id})">
+    
+                        📂 Ouvrir
+    
+                    </button>
+    
+                    <button onclick="supprimerMission(${mission.id})">
+    
+                        🗑 Supprimer
+    
+                    </button>
+    
+                </div>
+    
+            </div>
+    
+            `;
+    
+        });
+    
+    }
+    function supprimerMission(id){
+
+        if(!confirm("Supprimer ce rapport ?"))
+    
+            return;
+    
+        let missions=
+    
+            JSON.parse(
+    
+                localStorage.getItem("missionsCJJD")
+    
+            )||[];
+    
+        missions=missions.filter(
+    
+            m=>m.id!==id
+    
+        );
+    
+        localStorage.setItem(
+    
+            "missionsCJJD",
+    
+            JSON.stringify(missions)
+    
+        );
+    
+        chargerRapports();
+    
+    }
+    function ouvrirMission(id){
+
+        const missions = JSON.parse(
+    
+            localStorage.getItem("missionsCJJD")
+    
+        ) || [];
+    
+        missionCourante = missions.find(
+    
+            m => m.id === id
+    
+        );
+    
+        if(!missionCourante){
+    
+            alert("Mission introuvable.");
+    
+            return;
+    
+        }
+    
+        if(confirm(
+    
+            "Voulez-vous ouvrir cette mission ? Les données actuellement affichées seront remplacées."
+    
+        )){
+    
+            chargerMission();
+    
+        }
+    
+    }
+    function chargerMission(){
+
+        if(!missionCourante) return;
+    
+        const rapport = missionCourante.rapport;
+    
+        /*-----------------------------------------
+          Technique A
+        -----------------------------------------*/
+    
+        rapportAudit.A.details = structuredClone(
+    
+            rapport.A.details
+    
+        );
+        /*-----------------------------------------
+  Recharger les champs de la Technique A
+-----------------------------------------*/
+
+rapportAudit.A.details.forEach(ligne=>{
+
+    const champs=document.querySelectorAll(
+
+        `input.calcA[data-table="${ligne.compte}"][data-devise="${ligne.devise}"]`
+
+    );
+
+    if(champs.length===2){
+
+        champs[0].value=ligne.cloture;
+
+        champs[1].value=ligne.ouverture;
+
+    }
+
+});
+    
+        /*-----------------------------------------
+          Technique B
+        -----------------------------------------*/
+    
+        rapportAudit.B.details = structuredClone(
+    
+            rapport.B.details
+    
+        );
+        /*-----------------------------------------
+  Recharger les champs de la Technique B1
+-----------------------------------------*/
+
+rapportAudit.B.details
+.filter(ligne=>ligne.controle==="tableB1")
+.forEach(ligne=>{
+
+    const ede=document.querySelector(
+
+        `.calcB1[data-devise="${ligne.devise}"][data-type="ede"]`
+
+    );
+
+    const illico=document.querySelector(
+
+        `.calcB1[data-devise="${ligne.devise}"][data-type="illico"]`
+
+    );
+
+    const mpesa=document.querySelector(
+
+        `.calcB1[data-devise="${ligne.devise}"][data-type="mpesa"]`
+
+    );
+
+    if(ede) ede.value=ligne.ede;
+
+    if(illico) illico.value=ligne.illico;
+
+    if(mpesa) mpesa.value=ligne.mpesa;
+
+});
+/*-----------------------------------------
+  Recharger les champs des Techniques B2 et B3
+-----------------------------------------*/
+
+rapportAudit.B.details
+.filter(ligne=>ligne.controle!=="tableB1")
+.forEach(ligne=>{
+
+    const champs=document.querySelectorAll(
+
+        `input.calcB[data-table="${ligne.controle}"][data-devise="${ligne.devise}"]`
+
+    );
+
+    if(champs.length===2){
+
+        champs[0].value=ligne.valeur1;
+
+        champs[1].value=ligne.valeur2;
+
+    }
+
+});
+    
+        /*-----------------------------------------
+          Technique C
+        -----------------------------------------*/
+    
+        rapportAudit.C.details = structuredClone(
+    
+            rapport.C.details
+    
+        );
+    
+        rapportAudit.C.anomalies = structuredClone(
+    
+            rapport.C.anomalies
+    
+        );
+        /*-----------------------------------------
+  Recharger les tableaux de la Technique C
+-----------------------------------------*/
+
+[
+    "encaissementsEDE",
+    "encaissementsJournal",
+    "decaissementsEDD",
+    "decaissementsJournal"
+].forEach(id=>{
+
+    const tbody=document.getElementById(id);
+
+    if(!tbody) return;
+
+    tbody.innerHTML="";
+
+    const lignes=missionCourante.techniqueC[id]||[];
+
+    if(lignes.length===0){
+
+        ajouterLigne(id);
+
+        return;
+
+    }
+
+    lignes.forEach(()=>{
+
+        ajouterLigne(id);
+
+    });
+
+    const trs=tbody.querySelectorAll("tr");
+
+    lignes.forEach((ligne,index)=>{
+
+        const champs=trs[index].querySelectorAll("input,select");
+
+        champs[0].value=ligne.date;
+
+        champs[1].value=ligne.canal;
+
+        champs[2].value=ligne.libelle;
+
+        champs[3].value=ligne.devise;
+
+        champs[4].value=ligne.montant;
+
+        champs[5].value=ligne.reference;
+
+    });
+
+});
+
+    /*-----------------------------------------
+  Rafraîchir toute l'interface
+-----------------------------------------*/
+
+calculTechniqueA();
+
+calculTechniqueB();
+
+calculTechniqueC();
+
+updateSummary();
+
+chargerRapports();
+    }
+
+    chargerRapports();

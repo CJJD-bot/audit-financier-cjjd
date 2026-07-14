@@ -83,7 +83,7 @@
 
                 <label>Numéro du rapport</label>
 
-                <input type="text">
+                <input type="text" id="numeroRapport">
 
             </div>
 
@@ -91,7 +91,7 @@
 
                 <label>Exercice audité</label>
 
-                <input type="text">
+                <input type="text" id="exercice">
 
             </div>
 
@@ -99,7 +99,7 @@
 
                 <label>Date de la mission</label>
 
-                <input type="date">
+                <input type="date" id="dateMission">
 
             </div>
 
@@ -107,7 +107,7 @@
 
                 <label>Lieu</label>
 
-                <input type="text">
+                <input type="text" id="lieuMission">
 
             </div>
 
@@ -115,7 +115,7 @@
 
                 <label>Président de la Commission</label>
 
-                <input type="text">
+                <input type="text" id="presidentCommission">
 
             </div>
 
@@ -123,7 +123,7 @@
 
                 <label>Membres</label>
 
-                <input type="text">
+                <input type="text" id="membresCommission">
 
             </div>
 
@@ -131,7 +131,7 @@
 
                 <label>Coordonnateur</label>
 
-                <input type="text">
+                <input type="text" id="coordonnateur">
 
             </div>
 
@@ -139,7 +139,7 @@
 
                 <label>Questeur titulaire</label>
 
-                <input type="text">
+                <input type="text" id="questeurTitulaire">
 
             </div>
 
@@ -147,7 +147,7 @@
 
                 <label>Questeur adjoint</label>
 
-                <input type="text">
+                <input type="text" id="questeurAdjoint">
 
             </div>
 
@@ -192,7 +192,7 @@
 
         <label>Motivation</label>
 
-        <textarea></textarea>
+        <textarea id="motivation"></textarea>
 
     </section>
 
@@ -202,7 +202,7 @@
 
         <h2>Recommandations générales</h2>
 
-        <textarea></textarea>
+        <textarea id="recommandations"></textarea>
 
     </section>
 
@@ -218,7 +218,7 @@
 
                 <label>Lieu</label>
 
-                <input type="text">
+                <input type="text" id="lieuCloture">
 
             </div>
 
@@ -226,7 +226,7 @@
 
                 <label>Date</label>
 
-                <input type="date">
+                <input type="date" id="dateCloture">
 
             </div>
 
@@ -299,6 +299,21 @@
                 🖨️ Imprimer le rapport
         
             </button>
+            <div class="saved-reports">
+
+                <h2>📂 Rapports enregistrés</h2>
+            
+                <div id="savedReports">
+            
+                    <div class="empty-report">
+            
+                        Aucun rapport enregistré.
+            
+                    </div>
+            
+                </div>
+            
+            </div>
         
         </div>
 
