@@ -950,3 +950,106 @@ RESPONSIVE - TABLETTES ET TÉLÉPHONES
     }
 
 }
+/*==================================================
+MODE PAYSAGE SMARTPHONE
+==================================================*/
+
+#rotateOverlay{
+
+    display:none;
+
+}
+
+@media screen and (max-width:768px) and (orientation:portrait){
+
+    #rotateOverlay{
+
+        position:fixed;
+
+        inset:0;
+
+        background:#163d6b;
+
+        color:white;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        z-index:999999;
+
+        padding:30px;
+
+        text-align:center;
+
+    }
+
+    .rotate-box{
+
+        max-width:340px;
+
+    }
+
+    .rotate-icon{
+
+        font-size:70px;
+
+        margin-bottom:25px;
+
+        animation:rotation 2s infinite;
+
+    }
+
+    .rotate-box h2{
+
+        color:white;
+
+        margin-bottom:20px;
+
+    }
+
+    .rotate-box p{
+
+        color:white;
+
+        line-height:1.8;
+
+    }
+
+}
+
+@keyframes rotation{
+
+    0%{
+
+        transform:rotate(0deg);
+
+    }
+
+    25%{
+
+        transform:rotate(90deg);
+
+    }
+
+    50%{
+
+        transform:rotate(90deg);
+
+    }
+
+    75%{
+
+        transform:rotate(0deg);
+
+    }
+
+    100%{
+
+        transform:rotate(0deg);
+
+    }
+
+}
